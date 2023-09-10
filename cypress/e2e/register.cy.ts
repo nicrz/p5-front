@@ -1,4 +1,4 @@
-describe('Register spec', () => {
+describe('Register', () => {
     it('creates an account', () => {
       const validFirstName = 'test';
       const validLastName = 'test2';
@@ -13,7 +13,7 @@ describe('Register spec', () => {
       cy.get('button[type="submit"]').click();
       cy.wait(500);
 
-      cy.get('[formcontrolname="email"]').should('be.visible').type('test63@gmail.com');
+      cy.get('[formcontrolname="email"]').should('be.visible').type('test64@gmail.com');
       cy.get('[formcontrolname="password"]').type('password');
       cy.get('button[type="submit"]').click();
 

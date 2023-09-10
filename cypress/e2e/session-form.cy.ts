@@ -33,7 +33,7 @@ describe('Form Component', () => {
         cy.wait(500); 
   
         cy.get('[formcontrolname="name"]').type('Nouvelle session');
-        cy.get('[formcontrolname="date"]').type('2023-07-30');
+        cy.get('[formcontrolname="date"]').type('2023-08-30');
         cy.get('[formcontrolname="description"]').type('Description de la nouvelle session');
   
         cy.get('button[type="submit"]').should('be.disabled');

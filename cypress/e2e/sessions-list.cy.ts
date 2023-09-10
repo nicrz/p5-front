@@ -1,4 +1,4 @@
-describe('Registration Form', () => {
+describe('Sessions list', () => {
     
     before(() => {
         // Se connecter avec un utilisateur admin
