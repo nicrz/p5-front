@@ -2,7 +2,7 @@ describe('Register', () => {
     it('creates an account', () => {
       const validFirstName = 'test';
       const validLastName = 'test2';
-      const validEmail = 'test71@gmail.com';
+      const validEmail = 'test72@gmail.com';
       const validPassword = 'password';
   
       cy.visit('/register');
@@ -13,7 +13,7 @@ describe('Register', () => {
       cy.get('button[type="submit"]').click();
       cy.wait(1000);
 
-      cy.get('[formcontrolname="email"]').should('be.visible').type('test71@gmail.com');
+      cy.get('[formcontrolname="email"]').should('be.visible').type('test72@gmail.com');
       cy.get('[formcontrolname="password"]').type('password');
       cy.get('button[type="submit"]').click();
 
