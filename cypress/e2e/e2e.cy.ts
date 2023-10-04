@@ -2,7 +2,7 @@ describe('Register', () => {
     it('creates an account', () => {
       const validFirstName = 'test';
       const validLastName = 'test2';
-      const validEmail = 'test72@gmail.com';
+      const validEmail = 'test77@gmail.com';
       const validPassword = 'password';
   
       cy.visit('/register');
@@ -13,7 +13,7 @@ describe('Register', () => {
       cy.get('button[type="submit"]').click();
       cy.wait(1000);
 
-      cy.get('[formcontrolname="email"]').should('be.visible').type('test72@gmail.com');
+      cy.get('[formcontrolname="email"]').should('be.visible').type('test77@gmail.com');
       cy.get('[formcontrolname="password"]').type('password');
       cy.get('button[type="submit"]').click();
 
@@ -69,7 +69,7 @@ describe('Login spec', () => {
     it('creates and deletes an account', () => {
       const validFirstName = 'test';
       const validLastName = 'test2';
-      const validEmail = 'testsupp6@gmail.com';
+      const validEmail = 'testsupp9@gmail.com';
       const validPassword = 'password';
   
       cy.visit('/register');
@@ -80,7 +80,7 @@ describe('Login spec', () => {
       cy.get('button[type="submit"]').click();
       cy.wait(500);
 
-      cy.get('[formcontrolname="email"]').type('testsupp6@gmail.com');
+      cy.get('[formcontrolname="email"]').type('testsupp9@gmail.com');
       cy.get('[formcontrolname="password"]').type('password');
       cy.get('button[type="submit"]').click();
       cy.wait(500);
@@ -142,7 +142,7 @@ describe('Login spec', () => {
     it('Vérifier que le bouton "Create" et "Update" n\'est pas visible pour un utilisateur non-admin', () => {
         // Se connecter avec un utilisateur non-admin
         cy.visit('/login');
-        cy.get('[formcontrolname="email"]').type('ruiz.nico64@gmail.com');
+        cy.get('[formcontrolname="email"]').type('ruiz.nico64000@gmail.com');
         cy.get('[formcontrolname="password"]').type('Test64170');
         cy.get('button[type="submit"]').click();
         cy.wait(2000); 
@@ -156,7 +156,7 @@ describe('Session details', () => {
     before(() => {
         // Se connecter avec un compte utilisateur
         cy.visit('/login');
-        cy.get('[formcontrolname="email"]').type('ruiz.nico64@gmail.com');
+        cy.get('[formcontrolname="email"]').type('ruiz.nico64000@gmail.com');
         cy.get('[formcontrolname="password"]').type('Test64170');
         cy.get('button[type="submit"]').click();
         cy.wait(500); 
