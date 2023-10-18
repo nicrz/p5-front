@@ -1,21 +1,31 @@
-describe('Register', () => {
+describe('Registration Form', () => {
+    beforeEach(() => {
+      cy.visit('/register'); 
+    });
+  
+    it('should display the registration form', () => {
+      cy.get('.register-form').should('be.visible');
+    });
+  
+    it('should show an error message on form submission with invalid data', () => {
+      cy.get('[formcontrolname="firstName"]').type(' '); 
+      cy.get('[formcontrolname="lastName"]').type(' '); 
+      cy.get('[formcontrolname="email"]').type('invalidemail');
+      cy.get('[formcontrolname="password"]').type('short'); 
+      cy.get('button[type="submit"]').should('be.disabled');
+    });
+  
     it('creates an account', () => {
-      const validFirstName = 'test';
-      const validLastName = 'test2';
-      const validEmail = 'test77@gmail.com';
-      const validPassword = 'password';
   
       cy.visit('/register');
-      cy.get('[formcontrolname="firstName"]').type(validFirstName);
-      cy.get('[formcontrolname="lastName"]').type(validLastName);
-      cy.get('[formcontrolname="email"]').type(validEmail);
-      cy.get('[formcontrolname="password"]').type(validPassword);
-      cy.get('button[type="submit"]').click();
+      cy.get('[formcontrolname="firstName"]').type("test");
+      cy.get('[formcontrolname="lastName"]').type("test2");
+      cy.get('[formcontrolname="email"]').type("test83@gmail.com");
+      cy.get('[formcontrolname="password"]').type(`${"password"}{enter}{enter}`);
       cy.wait(1000);
 
-      cy.get('[formcontrolname="email"]').should('be.visible').type('test77@gmail.com');
-      cy.get('[formcontrolname="password"]').type('password');
-      cy.get('button[type="submit"]').click();
+      cy.get('[formcontrolname="email"]').should('be.visible').type('test83@gmail.com');
+      cy.get('[formcontrolname="password"]').type(`${"password"}{enter}{enter}`);
 
     });
   });
@@ -50,14 +60,33 @@ describe('Login spec', () => {
 
   describe('Account', () => {
     it('displays user information and admin status', () => {
-      cy.visit('/login');
-      cy.get('[formcontrolname="email"]').type('yoga@studio.com');
-      cy.get('[formcontrolname="password"]').type('test!1234');
-      cy.get('button[type="submit"]').click();
-      cy.wait(500);
+      cy.visit('/login')
+  
+      cy.intercept('POST', '/api/auth/login', {
+        body: {
+          id: 1,
+          username: 'userName',
+          firstName: 'firstName',
+          lastName: 'lastName',
+          admin: true
+        },
+      })
+  
+      cy.intercept(
+        {
+          method: 'GET',
+          url: '/api/session',
+        },
+        []).as('session')
+  
+      cy.get('input[formControlName=email]').type("yoga@studio.com")
+      cy.get('input[formControlName=password]').type(`${"test!1234"}{enter}{enter}`)
+      cy.wait(1000);
   
       cy.contains('span', 'Account').click();
       cy.location('pathname').should('eq', '/me');
+
+      cy.wait(5000);
   
       cy.contains('h1', 'User information').should('be.visible');
       cy.contains('Name: Admin').should('be.visible');
@@ -69,7 +98,7 @@ describe('Login spec', () => {
     it('creates and deletes an account', () => {
       const validFirstName = 'test';
       const validLastName = 'test2';
-      const validEmail = 'testsupp9@gmail.com';
+      const validEmail = 'testsupp13@gmail.com';
       const validPassword = 'password';
   
       cy.visit('/register');
@@ -80,8 +109,8 @@ describe('Login spec', () => {
       cy.get('button[type="submit"]').click();
       cy.wait(500);
 
-      cy.get('[formcontrolname="email"]').type('testsupp9@gmail.com');
-      cy.get('[formcontrolname="password"]').type('password');
+      cy.get('[formcontrolname="email"]').type(validEmail);
+      cy.get('[formcontrolname="password"]').type(validPassword);
       cy.get('button[type="submit"]').click();
       cy.wait(500);
 
